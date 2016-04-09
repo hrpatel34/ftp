@@ -10,6 +10,84 @@
                 <maven.compiler.source>1.7</maven.compiler.source>
                 <maven.compiler.target>1.7</maven.compiler.target>
         </properties>
+
+        <dependencies>
+                <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>1.2.17</version>
+                </dependency>
+        </dependencies>
+        <build>
+                <resources>
+                        <resource>
+                                <filtering>true</filtering>
+                                <directory>src/main/resources</directory>
+                                <excludes>
+                                        <exclude>**/*.*</exclude>
+                                </excludes>
+                        </resource>
+                </resources>
+                <plugins>
+                        <plugin>
+                                <artifactId>maven-resources-plugin</artifactId>
+                                <version>2.7</version>
+                                <executions>
+                                        <execution>
+                                                <id>copy-resources</id>
+                                                <phase>validate</phase>
+                                                <goals>
+                                                        <goal>copy-resources</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <outputDirectory>${basedir}/target/configuration</outputDirectory>
+                                                        <resources>
+                                                                <resource>
+                                                                        <directory>src/main/resources</directory>
+                                                                        <filtering>true</filtering>
+                                                                </resource>
+                                                        </resources>
+                                                </configuration>
+                                        </execution>
+                                        <execution>
+                                                <id>copy-executable</id>
+                                                <phase>validate</phase>
+                                                <goals>
+                                                        <goal>copy-resources</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <outputDirectory>${basedir}/target</outputDirectory>
+                                                        <resources>
+                                                                <resource>
+                                                                        <directory>src/main/bin</directory>
+                                                                        <filtering>true</filtering>
+                                                                </resource>
+                                                        </resources>
+                                                </configuration>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-dependency-plugin</artifactId>
+                                <executions>
+                                        <execution>
+                                                <id>copy-dependencies</id>
+                                                <phase>prepare-package</phase>
+                                                <goals>
+                                                        <goal>copy-dependencies</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                                        <overWriteReleases>false</overWriteReleases>
+                                                        <overWriteSnapshots>false</overWriteSnapshots>
+                                                        <overWriteIfNewer>true</overWriteIfNewer>
+                                                </configuration>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                </plugins>
+        </build>
         <profiles>
                 <profile>
                         <id>LOCAL</id>
@@ -17,21 +95,32 @@
                                 <activeByDefault>true</activeByDefault>
                         </activation>
                         <properties>
-                                <FTP.SERVER></FTP.SERVER>
-                                <FTP.PORT></FTP.PORT>
-                                <FTP.USERNAME></FTP.USERNAME>
-                                <FTP.PASSWORD></FTP.PASSWORD>
-                                <FTP.LOCATION></FTP.LOCATION>
+                                <ftp.server></ftp.server>
+                                <ftp.port></ftp.port>
+                                <ftp.username></ftp.username>
+                                <ftp.password></ftp.password>
+                                <ftp.location></ftp.location>
 
-                                <LOCAL.LOCATION></LOCAL.LOCATION>
+                                <local.location></local.location>
 
-                                <DOWNLOAD>FALSE</DOWNLOAD>
-                                <FILE.REGEXP>*</FILE.REGEXP>
+                                <download>false</download>
+                                <file.regexp>*</file.regexp>
 
-                                <CONNECTIONS>1</CONNECTIONS>
-                                <CONNECTION.FREQUENCY></CONNECTION.FREQUENCY>
+                                <connections>1</connections>
+                                <connection.frequency>2</connection.frequency>
+
+                                <log4j.rootCategory>DEBUG</log4j.rootCategory>
+                                <log4j.root>file</log4j.root>
+                                <log4j.file>log/ftp.log</log4j.file>
+                                <log4j.file.size>50MB</log4j.file.size>
+                                <log4j.maxBackupIndex>10</log4j.maxBackupIndex>
+
+                                <log4j.maxBackupIndex>10</log4j.maxBackupIndex>
+
+                                <mail.server></mail.server>
 
                         </properties>
                 </profile>
         </profiles>
+
 </project>
