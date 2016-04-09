@@ -26,10 +26,9 @@
                                 <LOCAL.LOCATION></LOCAL.LOCATION>
 
                                 <DOWNLOAD>FALSE</DOWNLOAD>
-                                <FILE.REG>*</FILE.REG>
+                                <FILE.REGEXP>*</FILE.REGEXP>
 
                                 <CONNECTIONS>1</CONNECTIONS>
-                                
                                 <CONNECTION.FREQUENCY></CONNECTION.FREQUENCY>
 
                         </properties>
