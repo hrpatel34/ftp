@@ -122,18 +122,14 @@
                                 <file.regexp>*</file.regexp>
 
                                 <connections>1</connections>
-                                <connection.frequency>2</connection.frequency>
+                                <connection.frequency>60</connection.frequency><!-- No. Seconds to wait for reconnection -->
 
                                 <log4j.rootCategory>DEBUG</log4j.rootCategory>
                                 <log4j.root>file</log4j.root>
                                 <log4j.file>log/ftp.log</log4j.file>
                                 <log4j.file.size>50MB</log4j.file.size>
                                 <log4j.maxBackupIndex>10</log4j.maxBackupIndex>
-
-                                <log4j.maxBackupIndex>10</log4j.maxBackupIndex>
-
-                                <mail.server></mail.server>
-
+                                
                         </properties>
                 </profile>
         </profiles>
